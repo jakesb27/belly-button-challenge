@@ -31,7 +31,7 @@ d3.json(url).then(function(data) {
     };
   });
 
-  // call functions to update bar and bubble charts
+  // create bar chart
   samples.forEach((sample) => {
     if (sample.id == selSample) {
       let xValues = sample.sample_values.slice(0, 10).reverse();
@@ -47,6 +47,27 @@ d3.json(url).then(function(data) {
       Plotly.newPlot("bar", [trace1]);
     };
   });
+
+  // create bubble chart
+  samples.forEach((sample) => {
+    if (sample.id == selSample) {
+      let xValues = sample.otu_ids;
+      let yValues = sample.sample_values;
+
+      let trace1 = {
+        x: xValues,
+        y: yValues,
+        text: sample.otu_labels.slice(0, 10).reverse(),
+        mode: "markers",
+        marker: {
+          size: yValues,
+          color: xValues,
+          colorscale: "Earth"
+        }
+      };
+      Plotly.newPlot("bubble", [trace1]);
+    };
+  });
 });
 
 // function used to update visualizations with new selection
@@ -54,6 +75,7 @@ function optionChanged(value) {
   selSample = value;
   updateDemographics();
   updateBarChart();
+  updateBubbleChart();
 };
 
 // function used to update bar chart
@@ -77,7 +99,25 @@ function updateBarChart() {
 
 // function used to update bubble chart
 function updateBubbleChart() {
+  samples.forEach((sample) => {
+    if (sample.id == selSample) {
+      let xValues = sample.otu_ids;
+      let yValues = sample.sample_values;
 
+      let trace1 = {
+        x: xValues,
+        y: yValues,
+        text: sample.otu_labels.slice(0, 10).reverse(),
+        mode: "markers",
+        marker: {
+          size: yValues,
+          color: xValues,
+          colorscale: "Earth"
+        }
+      };
+      Plotly.react("bubble", [trace1]);
+    };
+  });
 };
 
 // function used to update demographics

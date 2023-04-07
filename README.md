@@ -1,2 +1,9 @@
-# belly-button-challenge
-UCI Module 14 Challenge
+# Belly Button Challenge
+
+UCI Data Analytics Bootcamp | Module 11 Challenge
+
+<br />
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
